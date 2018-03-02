@@ -24,6 +24,15 @@ app.get('/users', (req, res) => {
     ]);
 });
 
+app.get('/user', (req, res) => {
+    res.send(
+        {
+            name: "yaroslav",
+            lastname: "draha"
+        }
+    );
+});
+
 app.listen(port, () => {
     console.log(`Server is up on ${port}`);
 });
