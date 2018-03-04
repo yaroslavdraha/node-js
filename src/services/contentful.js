@@ -1,3 +1,4 @@
+const db = require('./db');
 
 module.exports = {
     add: (a, b) => a + b,
@@ -18,12 +19,11 @@ module.exports = {
         }, 1000);
     },
 
-    getContentTypesAsyncWithPromise: () => {
-        return new Promise((resolve, reject) => {
-            // call to api
-            setTimeout(() => {
-                resolve(350);
-            }, 1500);
-        });
+    addContentType: (type) => {
+        // check if exist
+
+        db.saveContentType(type);
+
+        // send email
     }
 };

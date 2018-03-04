@@ -1,7 +1,9 @@
 const chai = require('chai');
 let assert = chai.assert;
 let expect = chai.expect;
-// let should = chai.should;
+const sinon = require('sinon');
+
+
 
 // const assertArrays = require('chai-arrays');
 // chai.use(assertArrays);
@@ -9,7 +11,7 @@ let expect = chai.expect;
 const Contentful = require('../../src/services/contentful');
 
 describe('Contentful operations', function () {
-    it('should add two numbers', () => {
+    /*it('should add two numbers', () => {
         let result = Contentful.add(100, 200);
         assert.equal(300, result);
         assert.isNumber(result, "The result is not a number motherfucker!");
@@ -41,6 +43,13 @@ describe('Contentful operations', function () {
                 done();
         //     });
 
+    });*/
+
+    it('should add content type', () => {
+        let callback = sinon.spy();
+        callback();
+
+        assert.equal(callback.called, true);
     });
 });
 
