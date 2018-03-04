@@ -8,7 +8,7 @@
     "tw": "nodemon --exec \"npm test\"",
     "dev": "nodemon src/app.js",
     "start": "node src/app.js",
-    "postinstall": "npm test"
+    "postinstall": "mocha **/*.test.js --exit"
   },
   "author": "",
   "license": "ISC",
