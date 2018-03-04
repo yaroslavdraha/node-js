@@ -18,7 +18,7 @@ describe('Application', function () {
                 .expect((res) => {
                     const body = res.body;
                     expect(body).to.include({
-                        name: "Sashkooo"
+                        name: "Sashko"
                     });
                 })
                 .end(done);
