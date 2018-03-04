@@ -4,7 +4,10 @@ const port = process.env.PORT || 3000;
 let app = new express();
 
 app.get('/', (req, res) => {
-    res.send('Hello world');
+    res.send({
+        name: "Sashko",
+        description: "Painted ass"
+    });
 });
 
 app.get('/users', (req, res) => {
