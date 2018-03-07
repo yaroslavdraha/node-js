@@ -9,7 +9,6 @@ let assert = chai.assert;
 const app = require('../src/app');
 //endregion
 
-
 describe('Application', function () {
     describe('GET /', function () {
         it('should return information about Sashko', function (done) {
