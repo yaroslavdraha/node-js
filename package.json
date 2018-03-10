@@ -7,16 +7,14 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha --recursive --exit",
-    "tw": "nodemon --exec \"npm test\"",
+    "tw": "nodemon --exec 'npm test'",
     "dev": "nodemon src/app.js",
     "start": "node src/app.js",
     "postinstall": "npm test"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
-    "contentful": "^5.1.3",
     "express": "^4.16.2",
-    "mongodb": "^3.0.4",
     "mongoose": "^5.0.9"
   },
   "devDependencies": {

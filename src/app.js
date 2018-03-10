@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
 const mongoose = require('./services/mongoose');
-const User = require('./models/user');
 const Todo = require('./models/todo');
 
 const app = new express();
