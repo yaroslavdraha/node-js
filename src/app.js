@@ -1,28 +1,25 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
-let app = new express();
+const mongoose = require('./services/mongoose');
+const User = require('./models/user');
+const Todo = require('./models/todo');
 
-app.get('/', (req, res) => {
-    res.send({
-        name: "Sashko",
-        description: "Painted ass"
-    });
+const app = new express();
+app.use(bodyParser.json());
+
+app.post('/todos', (req, res) => {
+  const todo = new Todo({
+    text: req.body.text
+  });
+
+  todo.save().then((doc) => {
+    res.send(doc);
+  }, (e) => {
+    res.status(400).send(e);
+  })
 });
-
-app.get('/users', (req, res) => {
-    res.send([
-        {
-            name: "Yaroslav",
-            age: 22
-        },
-        {
-            name: "Anita",
-            age: 24
-        }
-    ]);
-});
-
 
 app.listen(port, () => {
     console.log(`Server is up on ${port}`);
