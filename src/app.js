@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000;
 
 const mongoose = require('./services/mongoose');
 const Todo = require('./models/todo');
+const ObjectID = require('mongodb').ObjectID;
 
 const app = new express();
 app.use(bodyParser.json());
@@ -22,6 +23,15 @@ app.get('/todos', (req, res) => {
   Todo.find().then(todos => {
     res.send({todos});
   }, (e) => res.status(400).send(e));
+});
+
+app.get('/todos/:id', (req, res) => {
+  const id = req.params.id;
+  if(!ObjectID.isValid(id)) {
+    return res.status(400).send({});
+  }
+
+  Todo.findById(id).then(todo => res.send({todo}), err => res.status(400).send(err.message));
 });
 
 app.listen(port, () => {
