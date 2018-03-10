@@ -8,8 +8,15 @@ const app = require('../src/app');
 const Todo = require('../src/models/todo');
 //endregion
 
+const todos = [
+  {text: 'First test todo'},
+  {text: 'Second test todo'}
+];
+
 beforeEach((done) => {
-  Todo.remove({}).then(() => done());
+  Todo.remove({}).then(() => {
+    return Todo.insertMany(todos);
+  }).then(() => done());
 });
 
 describe('Application', () => {
@@ -30,9 +37,7 @@ describe('Application', () => {
           }
 
           Todo.find().then(todos => {
-            expect(todos).to.have.lengthOf(1);
-            expect(todos[0].text).to.equal(text);
-
+            expect(todos).to.have.lengthOf(3);
             done();
           }).catch((e) => done(e));
         });
@@ -52,7 +57,7 @@ describe('Application', () => {
           }
 
           Todo.find().then(todos => {
-            expect(todos).to.have.lengthOf(0);
+            expect(todos).to.have.lengthOf(2);
             done();
           }).catch((err) => {
             done(err);
@@ -60,4 +65,17 @@ describe('Application', () => {
         });
     });
   });
+
+  describe('GET /todos', () => {
+    it('should get all todos', (done) => {
+      request(app)
+        .get('/todos')
+        .expect(200)
+        .expect(res => {
+          expect(res.body.todos.length).to.equal(2);
+        })
+        .end(done);
+    });
+  });
 });
+
