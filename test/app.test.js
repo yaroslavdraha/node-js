@@ -1,6 +1,7 @@
 //region [Libraries require]
 let request = require('supertest');
 let {expect, assert} = require('chai');
+const ObjectID = require('mongodb').ObjectID;
 //endregion
 
 //region [Module require]
@@ -9,8 +10,8 @@ const Todo = require('../src/models/todo');
 //endregion
 
 const todos = [
-  {text: 'First test todo'},
-  {text: 'Second test todo'}
+  {_id: new ObjectID(), text: 'First test todo'},
+  {_id: new ObjectID(), text: 'Second test todo'}
 ];
 
 beforeEach((done) => {
@@ -78,11 +79,37 @@ describe('Application', () => {
     });
   });
 
-  // describe('GET /todos/:id', () => {
-  //   it('should get todo by id', (done) => {
-  //
-  //     request(app)
-  //       .get('')
-  //   });
-  // });
+  describe('GET /todos/:id', () => {
+    it('should get todo by id', (done) => {
+      let firstTodo = todos[0];
+
+      request(app)
+        .get(`/todos/${firstTodo._id.toHexString()}`)
+        .expect(200)
+        .expect(res => {
+          expect(res.body.todo.text).to.equal(firstTodo.text);
+        })
+        .end(done);
+    });
+
+    it('should not get todo for invalid id', (done) => {
+      request(app)
+        .get('/todos/213123')
+        .expect(400)
+        .expect(res => {
+          expect(Object.keys(res.body)).to.be.lengthOf(0);
+        })
+        .end(done);
+    });
+
+    it('should not get todo for not existing id', (done) => {
+      request(app)
+        .get('/todos/7aa42ffe0631590a40f6d991')
+        .expect(404)
+        .expect(res => {
+          expect(Object.keys(res.body)).to.be.lengthOf(0);
+        })
+        .end(done);
+    });
+  });
 });
