@@ -1,8 +1,6 @@
 //region [Libraries require]
-let chai = require('chai');
 let request = require('supertest');
-let expect = chai.expect;
-let assert = chai.assert;
+let {expect, assert} = require('chai');
 //endregion
 
 //region [Module require]
