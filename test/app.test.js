@@ -112,4 +112,40 @@ describe('Application', () => {
         .end(done);
     });
   });
+
+  describe('DELETE /todos/:id', () => {
+    it('should remove First test todo', (done) => {
+      let firstTodoId = todos[0]._id.toHexString();
+
+      request(app)
+        .delete(`/todos/${firstTodoId}`)
+        .expect(200)
+        .expect(res => {
+          expect(res.body.text).to.equal(todos[0].text);
+        })
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          }
+
+          Todo.findById(firstTodoId).then(todo => {
+            expect(todo).to.equal(null);
+            done();
+          }, (err) => {
+            done(err);
+          })
+        })
+    });
+
+    
+    it('should not remove todo by invalid id', (done) => {
+      request(app)
+        .delete('/todos/71295')
+        .expect(400)
+        .expect(res => {
+          expect(res.body.message).to.be.a('string');
+        })
+        .end(done);
+    });
+  });
 });

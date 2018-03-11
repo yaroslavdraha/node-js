@@ -1,22 +1,16 @@
 const mongoose = require('../src/services/mongoose');
 const Todo = require('../src/models/todo');
 
-let id = '6aa432cb17f3632440a70ca022';
+let id = '5aa440e8c31dfc38748dff08';
 
-// Todo.find({
-//   _id: id
-// }).then(todos => {
-//   console.log('Todods', todos);
-// }/*, (err) => console.log(err)*/);
-//
-// Todo.findOne({
-//   _id: id
-// }).then(todo => {
-//   console.log('Todods', todo);
+// Todo.remove().then(result => {
+//   console.log(result.result);
 // });
 
-Todo.findById(id).then(todo => {
-  console.log('Todods', todo);
-}, (err) => console.log(err.message));
 
-// mongoose.connection.close();
+Todo.findByIdAndRemove({text: 'First test todo'}).then((doc) => {
+  console.log(doc);
+});
+
+
+// Todo.findByIdAndRemove
