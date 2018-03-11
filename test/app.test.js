@@ -137,7 +137,7 @@ describe('Application', () => {
         })
     });
 
-    
+
     it('should not remove todo by invalid id', (done) => {
       request(app)
         .delete('/todos/71295')

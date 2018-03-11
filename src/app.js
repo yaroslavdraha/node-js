@@ -1,6 +1,7 @@
+require('../config/config');
+
 const express = require('express');
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 3000;
 
 const mongoose = require('./services/mongoose');
 const Todo = require('./models/todo');
@@ -54,8 +55,8 @@ app.delete('/todos/:id', (req, res) => {
   }, (e) => res.status(404).send(e.message))
 });
 
-app.listen(port, () => {
-  console.log(`Server is up on ${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is up on ${process.env.PORT}`);
 });
 
 module.exports = app;
