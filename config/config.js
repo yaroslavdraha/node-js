@@ -7,7 +7,7 @@ switch (process.env.NODE_ENV) {
     break;
 
   case 'production':
-    process.env.MONGODB_URL = 'mongodb://yaroslav:qweasd123@ds135680.mlab.com:35680/mean-app-db';
+    process.env.MONGODB_URL = '';
     break;
 }
 
